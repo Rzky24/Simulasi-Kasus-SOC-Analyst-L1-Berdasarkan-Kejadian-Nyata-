@@ -183,6 +183,192 @@ User sebenarnya melihat 3 hal ini:
 
 1️⃣ Cara berpikir seperti analis
 
+
+
+# beberapa istilah di soc 
+
+1. Ceritakan bagaimana cara kerja SOC Analyst Level 1
+
+Jawaban
+
+SOC Analyst Level 1 bertugas melakukan monitoring alert keamanan dari SIEM atau security tools lainnya.
+Tugas utamanya adalah melakukan triage alert, melakukan analisis awal terhadap log, menentukan apakah alert tersebut true positive atau false positive, dan melakukan eskalasi ke tim SOC Level 2 jika diperlukan.
+
+2. Apa itu SIEM dan kenapa penting?
+
+Jawaban
+
+SIEM adalah sistem yang digunakan untuk mengumpulkan, mengkorelasikan, dan menganalisis log dari berbagai sumber seperti server, firewall, endpoint, dan aplikasi untuk mendeteksi aktivitas mencurigakan atau ancaman keamanan.
+
+3. Apa perbedaan antara alert dan incident?
+
+Jawaban
+
+Alert adalah notifikasi dari sistem keamanan yang menunjukkan aktivitas mencurigakan.
+Sedangkan incident adalah kejadian keamanan yang telah dikonfirmasi sebagai ancaman atau pelanggaran keamanan.
+
+4. Jika kamu menerima alert brute force, apa yang kamu lakukan?
+
+Jawaban
+
+Saya akan memeriksa log authentication untuk melihat jumlah login gagal, IP address yang melakukan percobaan login, serta waktu terjadinya aktivitas tersebut.
+Jika terlihat banyak login gagal dari satu IP dalam waktu singkat, maka kemungkinan besar terjadi brute force attack dan saya akan melakukan eskalasi atau memblokir IP tersebut sesuai prosedur.
+
+5. Apa itu false positive?
+
+Jawaban
+
+False positive adalah alert yang dihasilkan oleh sistem keamanan tetapi sebenarnya bukan aktivitas berbahaya.
+
+6. Apa itu log analysis?
+
+Jawaban
+
+Log analysis adalah proses menganalisis log dari sistem atau perangkat jaringan untuk mendeteksi aktivitas mencurigakan, kesalahan sistem, atau indikasi serangan.
+
+7. Apa itu MITRE ATT&CK framework?
+
+Jawaban
+
+MITRE ATT&CK adalah framework yang mendokumentasikan taktik dan teknik yang digunakan oleh attacker berdasarkan data serangan dunia nyata.
+
+8. Apa perbedaan IDS dan IPS?
+
+Jawaban
+
+IDS hanya mendeteksi serangan dan menghasilkan alert, sedangkan IPS dapat mendeteksi sekaligus memblokir serangan secara otomatis.
+
+9. Bagaimana cara mendeteksi malware di jaringan?
+
+Jawaban
+
+Malware dapat dideteksi melalui aktivitas jaringan mencurigakan, signature antivirus, perilaku file yang tidak normal, atau komunikasi dengan domain command and control.
+
+10. Apa itu IOC?
+
+Jawaban
+
+IOC adalah indikator yang menunjukkan kemungkinan adanya kompromi pada sistem seperti IP berbahaya, hash malware, domain malicious, atau file mencurigakan.
+
+11. Jika ada login berhasil setelah banyak login gagal, apa indikasinya?
+
+Jawaban
+
+Ini bisa menjadi indikasi brute force attack yang berhasil menebak password.
+
+12. Apa itu phishing?
+
+Jawaban
+
+Phishing adalah teknik social engineering yang digunakan attacker untuk menipu korban agar memberikan informasi sensitif melalui email atau website palsu.
+
+13. Apa itu malware?
+
+Jawaban
+
+Malware adalah software berbahaya yang dirancang untuk merusak sistem atau mencuri data.
+
+14. Apa yang dimaksud dengan CIA Triad?
+
+Jawaban
+
+CIA Triad terdiri dari Confidentiality, Integrity, dan Availability yang merupakan prinsip dasar keamanan informasi.
+
+15. Jika kamu menemukan IP address mencurigakan, apa yang kamu lakukan?
+
+Jawaban
+
+Saya akan melakukan pengecekan reputasi IP menggunakan threat intelligence tools seperti VirusTotal atau AbuseIPDB untuk mengetahui apakah IP tersebut pernah terlibat dalam aktivitas berbahaya.
+
+16. Apa itu port scanning?
+
+Jawaban
+
+Port scanning adalah teknik yang digunakan attacker untuk mencari port terbuka pada sistem target untuk menemukan layanan yang bisa diserang.
+
+17. Apa itu firewall?
+
+Jawaban
+
+Firewall adalah sistem keamanan jaringan yang digunakan untuk mengontrol lalu lintas jaringan berdasarkan aturan keamanan.
+
+18. Apa itu SIEM correlation rule?
+
+Jawaban
+
+Correlation rule digunakan dalam SIEM untuk menghubungkan berbagai event log sehingga dapat mendeteksi pola serangan yang kompleks.
+
+19. Bagaimana cara mendeteksi brute force di Linux?
+
+Jawaban
+
+Dengan melihat log authentication seperti /var/log/auth.log untuk melihat banyak login gagal dari IP yang sama.
+
+20. Apa itu command and control (C2)?
+
+Jawaban
+
+Command and Control adalah server yang digunakan attacker untuk berkomunikasi dengan malware yang telah menginfeksi sistem korban.
+
+21. Apa itu ransomware?
+
+Jawaban
+
+Ransomware adalah malware yang mengenkripsi file korban dan meminta tebusan untuk mengembalikan akses.
+
+22. Apa yang kamu lakukan jika endpoint terinfeksi malware?
+
+Jawaban
+
+Saya akan mengisolasi endpoint dari jaringan untuk mencegah penyebaran malware, kemudian melakukan analisis dan pembersihan sistem.
+
+23. Apa itu threat intelligence?
+
+Jawaban
+
+Threat intelligence adalah informasi tentang ancaman keamanan yang digunakan untuk membantu organisasi mendeteksi dan mencegah serangan.
+
+24. Apa itu privilege escalation?
+
+Jawaban
+
+Privilege escalation adalah teknik yang digunakan attacker untuk mendapatkan hak akses yang lebih tinggi pada sistem.
+
+25. Apa itu lateral movement?
+
+Jawaban
+
+Lateral movement adalah teknik attacker untuk berpindah dari satu sistem ke sistem lain dalam jaringan setelah berhasil masuk.
+
+26. Apa itu vulnerability?
+
+Jawaban
+
+Vulnerability adalah kelemahan pada sistem yang dapat dimanfaatkan oleh attacker untuk melakukan serangan.
+
+27. Apa itu patch management?
+
+Jawaban
+
+Patch management adalah proses memperbarui software untuk memperbaiki vulnerability atau bug keamanan.
+
+28. Apa itu SOC playbook?
+
+Jawaban
+
+Playbook adalah panduan langkah-langkah yang harus dilakukan oleh SOC analyst saat menangani jenis incident tertentu.
+
+29. Apa yang kamu lakukan jika SIEM menghasilkan banyak alert?
+
+Jawaban
+
+Saya akan memprioritaskan alert berdasarkan tingkat severity dan potensi dampaknya terhadap sistem organisasi.
+
+30. Kenapa kami harus memilih kamu sebagai SOC Analyst?
+
+Jawaban yang bagus untuk kamu
+
+Saya memiliki ketertarikan yang besar dalam bidang cybersecurity khususnya di SOC analyst. Saat ini saya sedang mempelajari SOC analyst path di TryHackMe dan juga telah belajar tentang log analysis, threat detection, dan dasar-dasar incident response. Saya juga memiliki semangat belajar yang tinggi dan siap berkembang dalam lingkungan SOC.
 bukan hanya hafalan
 
 2️⃣ Bisa membaca log
