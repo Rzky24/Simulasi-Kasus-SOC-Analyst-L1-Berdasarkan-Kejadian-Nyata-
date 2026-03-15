@@ -260,6 +260,8 @@ Contoh log:
 
 Source IP: 185.220.101.45
 Destination IP: 192.168.1.10
+
+
 3️⃣ Port
 
 Port adalah pintu komunikasi dalam jaringan.
@@ -306,6 +308,9 @@ Connection attempt to port 443
 Kemungkinan:
 
 port scanning
+
+
+
 4️⃣ Protocol Penting
 
 Protocol adalah aturan komunikasi jaringan.
@@ -372,6 +377,9 @@ IP
 domain
 certificate
 traffic pattern
+
+
+
 5️⃣ TCP vs UDP
 
 Ini pertanyaan interview SOC yang sangat sering muncul.
@@ -426,6 +434,9 @@ Cara mudah mengingat
 Application → HTTP DNS
 Transport → TCP UDP
 Network → IP
+
+
+
 7️⃣ Bagaimana SOC Menggunakan Network Knowledge
 
 SOC menggunakan network untuk menganalisis:
@@ -454,7 +465,9 @@ menggunakan protocol apa
 apakah mencurigakan
 
 8️⃣ Contoh Investigasi SOC Berdasarkan Network
-Kasus 1: Port Scanning
+
+
+# Kasus 1: Port Scanning
 
 Log:
 
@@ -470,7 +483,9 @@ Satu IP mencoba banyak port.
 Kemungkinan:
 
 port scanning
-Kasus 2: DNS Malware
+
+
+# Kasus 2: DNS Malware
 
 Log:
 
@@ -483,7 +498,9 @@ Endpoint mencoba mengakses domain berbahaya.
 Kemungkinan:
 
 malware communication
-Kasus 3: Brute Force SSH
+
+
+# Kasus 3: Brute Force SSH
 
 Log:
 
@@ -544,6 +561,8 @@ Kita akan bahas:
 4️⃣ HTTP / HTTPS
 5️⃣ TCP / UDP
 6️⃣ OSI Layer Model
+
+
 
 1️⃣ IP Address
 Apa itu IP Address
@@ -629,6 +648,8 @@ Kemungkinan:
 
 brute force
 port scanning
+
+
 2️⃣ Port
 Apa itu Port
 
@@ -674,6 +695,8 @@ Jika berulang:
 Kemungkinan:
 
 SSH brute force
+
+
 3️⃣ DNS
 Apa itu DNS
 
@@ -724,8 +747,10 @@ malware communication
 Biasanya malware akan:
 
 DNS query → connect C2 server
-4️⃣ HTTP
 
+
+
+4️⃣ HTTP
 HTTP adalah protocol komunikasi web.
 
 Port:
@@ -766,8 +791,10 @@ GET /login.php?id=1' OR '1'='1
 Ini indikasi:
 
 SQL injection
-5️⃣ HTTPS
 
+
+
+5️⃣ HTTPS
 HTTPS adalah HTTP yang dienkripsi menggunakan TLS.
 
 Port:
@@ -797,8 +824,9 @@ Jika domain berbahaya:
 ⚠️ kemungkinan:
 
 malware communication
-6️⃣ TCP
 
+
+6️⃣ TCP
 TCP adalah protocol yang reliable dan connection oriented.
 
 Artinya koneksi harus dibuat terlebih dahulu.
@@ -827,7 +855,6 @@ Client     Server
 Setelah itu komunikasi dimulai.
 
 7️⃣ UDP
-
 UDP adalah protocol connectionless.
 
 Tidak ada handshake.
@@ -845,8 +872,9 @@ lebih cepat
 Kerugian:
 
 tidak reliable
-8️⃣ OSI Layer Model
 
+
+8️⃣ OSI Layer Model
 OSI Model menjelaskan bagaimana data bergerak dalam jaringan.
 
 Ada 7 layer.
@@ -859,6 +887,7 @@ Layer	Nama
 3	Network
 2	Data Link
 1	Physical
+
 Layer yang sering digunakan di SOC
 
 SOC biasanya fokus pada 3 layer ini.
@@ -871,18 +900,20 @@ HTTP
 HTTPS
 DNS
 SMTP
+
 Layer 4 — Transport
-
 Protocol:
-
 TCP
 UDP
+
 Layer 3 — Network
-
 Protocol:
-
 IP
+
+
+
 Contoh Analisis SOC Berdasarkan Network
+
 Kasus 1 — Port Scanning
 
 Log:
@@ -897,8 +928,10 @@ Analisis:
 Satu IP mencoba banyak port.
 
 Kemungkinan:
-
 port scanning
+
+
+
 Kasus 2 — DNS Malware
 
 Log:
