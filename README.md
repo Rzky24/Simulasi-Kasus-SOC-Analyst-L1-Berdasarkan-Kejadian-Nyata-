@@ -1,6 +1,6 @@
-# Simulasi-Kasus-SOC-Analyst-L1-Berdasarkan-Kejadian-Nyata-
+# Simulasi-Kasus-SOC-Analyst-L1-Berdasarkan-Kejadian-Nyata-dan beberapa istilah istilah paling familiar 
 
-asus Brute Force SSH
+Kasus Brute Force SSH
 Interviewer
 
 Kami melihat banyak login gagal di server Linux. Log seperti ini muncul:
@@ -184,6 +184,801 @@ User sebenarnya melihat 3 hal ini:
 1️⃣ Cara berpikir seperti analis
 2️⃣ Bisa membaca log 
 3️⃣ Tidak panik saat incident
+
+# Dasar Jaringan 
+
+1️⃣ Konsep Dasar Networking
+
+Network adalah sistem yang menghubungkan beberapa perangkat untuk saling bertukar data.
+
+Contoh perangkat dalam network:
+
+Laptop
+Server
+Router
+Firewall
+Switch
+
+Contoh sederhana:
+
+Laptop → Router → Internet → Server
+
+Ketika user membuka website:
+
+Laptop → DNS → dapat IP → koneksi ke server
+
+SOC Analyst biasanya memonitor aktivitas ini melalui log jaringan.
+
+2️⃣ IP Address
+
+IP Address adalah alamat unik perangkat di jaringan.
+
+Contoh:
+
+192.168.1.10
+8.8.8.8
+172.217.22.14
+
+IP Address digunakan agar perangkat bisa saling menemukan satu sama lain.
+
+Contoh komunikasi:
+
+192.168.1.10 → 142.250.190.14
+
+Artinya:
+
+Laptop → Server Google
+Jenis IP Address
+Private IP
+
+Digunakan di jaringan lokal.
+
+Contoh:
+
+192.168.x.x
+10.x.x.x
+172.16.x.x
+Public IP
+
+Digunakan di internet.
+
+Contoh:
+
+8.8.8.8
+1.1.1.1
+Dalam SOC
+
+IP Address digunakan untuk:
+
+melacak attacker
+
+melihat sumber serangan
+
+melihat tujuan koneksi
+
+Contoh log:
+
+Source IP: 185.220.101.45
+Destination IP: 192.168.1.10
+3️⃣ Port
+
+Port adalah pintu komunikasi dalam jaringan.
+
+Contoh:
+
+IP = rumah
+Port = pintu rumah
+
+Satu server bisa memiliki banyak layanan.
+
+Contoh:
+
+IP: 192.168.1.10
+
+Port:
+
+22  → SSH
+80  → HTTP
+443 → HTTPS
+21  → FTP
+
+Contoh koneksi:
+
+192.168.1.5 → 192.168.1.10:22
+
+Artinya:
+
+client mencoba SSH ke server
+Dalam SOC
+
+Port digunakan untuk:
+
+mendeteksi scanning
+
+melihat layanan yang diserang
+
+Contoh log:
+
+Connection attempt to port 22
+Connection attempt to port 80
+Connection attempt to port 443
+
+Kemungkinan:
+
+port scanning
+4️⃣ Protocol Penting
+
+Protocol adalah aturan komunikasi jaringan.
+
+SOC sering melihat protocol ini.
+
+DNS
+
+DNS mengubah domain menjadi IP address.
+
+Contoh:
+
+google.com → 142.250.190.14
+
+Prosesnya:
+
+User buka google.com
+↓
+DNS request
+↓
+DNS server memberi IP
+↓
+Browser koneksi ke server
+SOC sering melihat log seperti ini
+DNS query: suspicious-domain.ru
+
+Jika domain berbahaya:
+
+⚠️ kemungkinan malware.
+
+HTTP
+
+HTTP digunakan untuk komunikasi web.
+
+Port:
+
+80
+
+Contoh request:
+
+GET /login HTTP/1.1
+Host: example.com
+
+SOC bisa mendeteksi:
+
+SQL injection
+web attack
+suspicious request
+HTTPS
+
+HTTPS adalah HTTP yang dienkripsi.
+
+Port:
+
+443
+
+Menggunakan:
+
+TLS encryption
+
+SOC tidak bisa melihat isi data, tetapi bisa melihat:
+
+IP
+domain
+certificate
+traffic pattern
+5️⃣ TCP vs UDP
+
+Ini pertanyaan interview SOC yang sangat sering muncul.
+
+TCP
+
+TCP adalah protocol connection oriented.
+
+Artinya koneksi dibuat terlebih dahulu.
+
+Contoh protocol:
+
+HTTP
+HTTPS
+SSH
+FTP
+TCP Handshake
+Client → SYN
+Server → SYN-ACK
+Client → ACK
+
+Tujuannya memastikan koneksi stabil.
+
+UDP
+
+UDP adalah protocol connectionless.
+
+Tidak ada handshake.
+
+Contoh:
+
+DNS
+VoIP
+Streaming
+
+Keunggulan:
+
+lebih cepat
+6️⃣ OSI Layer Model
+
+OSI Model menjelaskan bagaimana data bergerak dalam jaringan.
+
+Ada 7 layer.
+
+Namun SOC biasanya fokus pada 3 layer ini.
+
+Layer	Nama	Contoh
+7	Application	HTTP DNS
+4	Transport	TCP UDP
+3	Network	IP
+Cara mudah mengingat
+Application → HTTP DNS
+Transport → TCP UDP
+Network → IP
+7️⃣ Bagaimana SOC Menggunakan Network Knowledge
+
+SOC menggunakan network untuk menganalisis:
+
+IP
+Port
+Protocol
+Domain
+Traffic
+
+Contoh log:
+
+Source IP: 192.168.1.5
+Destination IP: 185.199.110.153
+Port: 443
+Protocol: HTTPS
+
+SOC akan menganalisis:
+
+siapa sumbernya
+
+kemana koneksi
+
+menggunakan protocol apa
+
+apakah mencurigakan
+
+8️⃣ Contoh Investigasi SOC Berdasarkan Network
+Kasus 1: Port Scanning
+
+Log:
+
+203.0.113.5 → port 21
+203.0.113.5 → port 22
+203.0.113.5 → port 80
+203.0.113.5 → port 443
+
+Analisis:
+
+Satu IP mencoba banyak port.
+
+Kemungkinan:
+
+port scanning
+Kasus 2: DNS Malware
+
+Log:
+
+DNS query: malware-domain.ru
+
+Analisis:
+
+Endpoint mencoba mengakses domain berbahaya.
+
+Kemungkinan:
+
+malware communication
+Kasus 3: Brute Force SSH
+
+Log:
+
+Failed password for root from 185.220.101.45
+
+Analisis:
+
+Login gagal berulang.
+
+Kemungkinan:
+
+brute force
+Cara Menjawab Saat Interview SOC
+
+Gunakan pola ini:
+
+1️⃣ Identifikasi
+
+Dari log tersebut terlihat adanya aktivitas mencurigakan.
+
+2️⃣ Dugaan serangan
+
+Hal ini kemungkinan merupakan brute force attack.
+
+3️⃣ Investigasi
+
+Saya akan memeriksa log lebih lanjut seperti IP address dan timestamp.
+
+4️⃣ Tindakan
+
+Jika aktivitas tersebut mencurigakan, saya akan melakukan eskalasi kepada tim SOC Level 2.
+
+Ringkasan Cepat (Untuk Hafalan Interview)
+Network
+IP = alamat perangkat
+Port = pintu layanan
+Protocol = aturan komunikasi
+Protocol penting
+DNS → domain ke IP
+HTTP → web
+HTTPS → web encrypted
+Transport
+TCP → reliable
+UDP → cepat
+OSI Layer penting
+Application
+Transport
+Network
+
+
+# Istilah istilah di jaringan / network
+
+Kita akan bahas:
+
+1️⃣ IP Address
+2️⃣ Port
+3️⃣ DNS
+4️⃣ HTTP / HTTPS
+5️⃣ TCP / UDP
+6️⃣ OSI Layer Model
+
+1️⃣ IP Address
+Apa itu IP Address
+
+IP Address (Internet Protocol Address) adalah alamat unik yang digunakan untuk mengidentifikasi perangkat dalam jaringan.
+
+Contoh:
+
+192.168.1.10
+8.8.8.8
+142.250.190.14
+
+Bayangkan seperti alamat rumah.
+
+IP = alamat rumah
+internet = jalan raya
+data = kendaraan
+
+Tanpa IP address, perangkat tidak tahu ke mana harus mengirim data.
+
+Contoh Komunikasi IP
+
+Misalnya laptop membuka Google.
+
+Laptop IP: 192.168.1.10
+Google IP: 142.250.190.14
+
+Komunikasi:
+
+192.168.1.10 → 142.250.190.14
+
+Artinya:
+
+Laptop mengirim request ke server Google
+Jenis IP Address
+Private IP
+
+Digunakan di jaringan internal.
+
+Contoh:
+
+192.168.x.x
+10.x.x.x
+172.16.x.x
+
+Biasanya digunakan di:
+
+rumah
+
+kantor
+
+LAN
+
+Public IP
+
+Digunakan di internet.
+
+Contoh:
+
+8.8.8.8
+1.1.1.1
+142.250.190.14
+Dalam SOC Investigation
+
+SOC menggunakan IP untuk:
+
+mencari sumber serangan
+
+mencari lokasi attacker
+
+memeriksa reputasi IP
+
+Contoh log:
+
+Source IP: 185.220.101.45
+Destination IP: 192.168.1.10
+
+Analisis:
+
+IP external mencoba akses server internal
+
+Kemungkinan:
+
+brute force
+port scanning
+2️⃣ Port
+Apa itu Port
+
+Port adalah jalur komunikasi untuk layanan tertentu di suatu IP.
+
+Jika IP adalah rumah, maka:
+
+Port = pintu rumah
+
+Contoh:
+
+IP: 192.168.1.10
+
+Port:
+
+22   SSH
+80   HTTP
+443  HTTPS
+21   FTP
+25   SMTP
+53   DNS
+Contoh Komunikasi
+192.168.1.5 → 192.168.1.10:22
+
+Artinya:
+
+Client mencoba koneksi SSH ke server
+Dalam SOC
+
+SOC sering menganalisis:
+
+IP
+Port
+Protocol
+
+Contoh log:
+
+Connection from 203.0.113.10
+to port 22
+
+Jika berulang:
+
+Kemungkinan:
+
+SSH brute force
+3️⃣ DNS
+Apa itu DNS
+
+DNS (Domain Name System) adalah sistem yang mengubah nama domain menjadi IP address.
+
+Contoh:
+
+google.com → 142.250.190.14
+
+Karena manusia lebih mudah mengingat domain daripada IP.
+
+Cara Kerja DNS
+
+Misalnya user membuka:
+
+google.com
+
+Prosesnya:
+
+1. Browser mengirim DNS request
+2. DNS server mencari IP
+3. DNS server mengirim IP
+4. Browser koneksi ke server
+
+Diagram sederhana:
+
+User
+ ↓
+DNS request
+ ↓
+DNS server
+ ↓
+IP address
+ ↓
+Website
+DNS dalam SOC
+
+SOC sering melihat log seperti ini:
+
+DNS query: suspicious-domain.ru
+
+Jika domain tersebut adalah domain malware:
+
+⚠️ kemungkinan:
+
+malware communication
+
+Biasanya malware akan:
+
+DNS query → connect C2 server
+4️⃣ HTTP
+
+HTTP adalah protocol komunikasi web.
+
+Port:
+
+80
+
+Digunakan untuk:
+
+website
+API
+web application
+Cara Kerja HTTP
+
+Client mengirim request.
+
+Contoh:
+
+GET /login HTTP/1.1
+Host: example.com
+
+Server mengirim response.
+
+Contoh:
+
+HTTP/1.1 200 OK
+Serangan yang sering muncul di HTTP
+
+SOC sering melihat:
+
+SQL Injection
+Directory Traversal
+Web scanning
+
+Contoh request mencurigakan:
+
+GET /login.php?id=1' OR '1'='1
+
+Ini indikasi:
+
+SQL injection
+5️⃣ HTTPS
+
+HTTPS adalah HTTP yang dienkripsi menggunakan TLS.
+
+Port:
+
+443
+
+Keuntungan:
+
+data terenkripsi
+lebih aman
+Apa yang bisa dilihat SOC
+
+Walaupun terenkripsi, SOC masih bisa melihat:
+
+IP
+domain
+port
+traffic size
+certificate
+
+Contoh log:
+
+192.168.1.10 → malicious-domain.ru:443
+
+Jika domain berbahaya:
+
+⚠️ kemungkinan:
+
+malware communication
+6️⃣ TCP
+
+TCP adalah protocol yang reliable dan connection oriented.
+
+Artinya koneksi harus dibuat terlebih dahulu.
+
+Contoh protocol TCP:
+
+HTTP
+HTTPS
+SSH
+FTP
+TCP 3-way handshake
+
+Sebelum komunikasi terjadi:
+
+Client → SYN
+Server → SYN-ACK
+Client → ACK
+
+Diagram:
+
+Client     Server
+  SYN  →
+       ← SYN-ACK
+  ACK  →
+
+Setelah itu komunikasi dimulai.
+
+7️⃣ UDP
+
+UDP adalah protocol connectionless.
+
+Tidak ada handshake.
+
+Contoh protocol UDP:
+
+DNS
+VoIP
+Streaming
+
+Keuntungan:
+
+lebih cepat
+
+Kerugian:
+
+tidak reliable
+8️⃣ OSI Layer Model
+
+OSI Model menjelaskan bagaimana data bergerak dalam jaringan.
+
+Ada 7 layer.
+
+Layer	Nama
+7	Application
+6	Presentation
+5	Session
+4	Transport
+3	Network
+2	Data Link
+1	Physical
+Layer yang sering digunakan di SOC
+
+SOC biasanya fokus pada 3 layer ini.
+
+Layer 7 — Application
+
+Contoh:
+
+HTTP
+HTTPS
+DNS
+SMTP
+Layer 4 — Transport
+
+Protocol:
+
+TCP
+UDP
+Layer 3 — Network
+
+Protocol:
+
+IP
+Contoh Analisis SOC Berdasarkan Network
+Kasus 1 — Port Scanning
+
+Log:
+
+203.0.113.5 → port 21
+203.0.113.5 → port 22
+203.0.113.5 → port 80
+203.0.113.5 → port 443
+
+Analisis:
+
+Satu IP mencoba banyak port.
+
+Kemungkinan:
+
+port scanning
+Kasus 2 — DNS Malware
+
+Log:
+
+DNS query: bad-domain.ru
+
+Analisis:
+
+Endpoint mengakses domain berbahaya.
+
+Kemungkinan:
+
+malware C2 communication
+Kasus 3 — Brute Force SSH
+
+Log:
+
+Failed password for root from 185.220.101.45
+
+Analisis:
+
+Login gagal berulang.
+
+Kemungkinan:
+
+brute force attack
+Cara Menjawab Saat Interview SOC
+
+Gunakan framework ini.
+
+1️⃣ Identifikasi
+
+Dari log tersebut terlihat adanya aktivitas mencurigakan.
+
+2️⃣ Dugaan serangan
+
+Hal ini kemungkinan merupakan brute force attack.
+
+3️⃣ Investigasi
+
+Saya akan memeriksa IP address, port, dan aktivitas log lainnya.
+
+4️⃣ Tindakan
+
+Jika aktivitas tersebut mencurigakan, saya akan melakukan eskalasi.
+
+# Ringkasan Super Cepat (Untuk Interview)
+
+IP
+alamat perangkat
+
+Port
+jalur layanan
+
+DNS
+domain → IP
+
+HTTP
+web communication
+port 80
+
+HTTPS
+web encrypted
+port 443
+
+TCP
+reliable
+handshake
+
+UDP
+lebih cepat
+tanpa handshake
+
+# OSI Layer penting
+
+Application
+Transport
+Network
+
+
 
 
 
