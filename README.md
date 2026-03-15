@@ -182,6 +182,8 @@ Rahasia Interview SOC yang Jarang Diberitahu
 User sebenarnya melihat 3 hal ini:
 
 1️⃣ Cara berpikir seperti analis
+2️⃣ Bisa membaca log 
+3️⃣ Tidak panik saat incident
 
 
 
@@ -371,5 +373,3 @@ Jawaban yang bagus untuk kamu
 Saya memiliki ketertarikan yang besar dalam bidang cybersecurity khususnya di SOC analyst. Saat ini saya sedang mempelajari SOC analyst path di TryHackMe dan juga telah belajar tentang log analysis, threat detection, dan dasar-dasar incident response. Saya juga memiliki semangat belajar yang tinggi dan siap berkembang dalam lingkungan SOC.
 bukan hanya hafalan
 
-2️⃣ Bisa membaca log
-3️⃣ Tidak panik saat incident
